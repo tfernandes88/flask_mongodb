@@ -149,6 +149,22 @@ def create_livro():
     }, 201
 
 '''
+@ Rota para deletar via API
+'''
+@app.delete('/deletar/<livro_id>')
+def delete_livro(livro_id):
+    query={
+        '_id': ObjectId(livro_id)
+    }
+    
+    result = collection.delete_one(query)
+    if not result.deleted_count:
+        return {
+            'message': 'Failed to delete'
+        }, 500
+    return { 'message': 'Delete Succcess' }, 200
+
+'''
 # Rota para deletar o ID
 '''
 
